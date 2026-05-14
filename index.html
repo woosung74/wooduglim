@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Woodug Lim — ESL · Hapkido · Bible Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --gold: #c9a84c;
+      --cream: #faf8f4;
+      --text: #2d2d2d;
+      --light-gray: #f0eeea;
+      --mid-gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 39, 68, 0.96);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold); font-size: 1.2rem; letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 0.88rem; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f1a30 0%, #1a2744 50%, #2a3d6b 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('images/hero-bg.jpg') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-subtitle {
+      font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: #fff; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-tagline {
+      font-size: 1.15rem; color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+    .hero-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .badge {
+      border: 1.5px solid var(--gold); color: var(--gold);
+      padding: 0.45rem 1.2rem; border-radius: 50px;
+      font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold); color: var(--navy);
+      padding: 0.85rem 2.5rem; border-radius: 50px;
+      text-decoration: none; font-weight: 600;
+      letter-spacing: 0.5px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 90px 5%; }
+    .section-label {
+      font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    .section-desc { max-width: 600px; color: #555; font-size: 1.02rem; }
+
+    /* ─── ABOUT ─── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 5%; align-items: center; max-width: 1100px; margin: 3rem auto 0;
+    }
+    .about-photo {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .about-photo img { width: 100%; display: block; }
+    .about-photo-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #1a2744, #2a3d6b);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4); font-size: 0.85rem;
+    }
+    .about-text h2 { margin-bottom: 1.2rem; }
+    .about-text p { color: #555; margin-bottom: 1rem; }
+    .about-facts { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+    .fact { text-align: center; }
+    .fact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; color: var(--gold); display: block;
+    }
+    .fact-label { font-size: 0.8rem; color: var(--mid-gray); letter-spacing: 0.5px; }
+
+    /* ─── CLASSES ─── */
+    #classes { background: var(--light-gray); }
+    .classes-intro { max-width: 700px; margin-bottom: 4rem; }
+    .classes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; max-width: 1200px;
+    }
+    .class-card {
+      background: #fff; border-radius: 16px;
+      overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .class-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .class-thumb {
+      height: 200px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .class-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .class-icon {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 3.5rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    }
+    .class-thumb-esl { background: linear-gradient(135deg, #1a4a6b, #2d6ea0); }
+    .class-thumb-hapkido { background: linear-gradient(135deg, #2d1a1a, #6b2020); }
+    .class-thumb-bible { background: linear-gradient(135deg, #1a3d2b, #2d6b4a); }
+    .class-body { padding: 1.8rem; }
+    .class-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .class-body p { font-size: 0.92rem; color: #666; margin-bottom: 1.5rem; }
+    .class-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag {
+      font-size: 0.72rem; padding: 0.3rem 0.8rem;
+      border-radius: 50px; background: var(--light-gray);
+      color: var(--navy); letter-spacing: 0.3px;
+    }
+    .btn-outline {
+      display: inline-block; border: 2px solid var(--navy);
+      color: var(--navy); padding: 0.6rem 1.5rem; border-radius: 50px;
+      text-decoration: none; font-size: 0.85rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    /* ─── PREVIEW MODALS / SECTIONS ─── */
+    .preview-section {
+      margin-top: 5rem; background: var(--cream);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+    .preview-header {
+      background: var(--navy); color: #fff;
+      padding: 2rem 2.5rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .preview-header h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem;
+    }
+    .preview-header span { color: var(--gold); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 2px; }
+    .preview-body { padding: 2.5rem; }
+
+    /* ESL Preview */
+    .lesson-card {
+      background: #fff; border-radius: 12px; padding: 1.5rem 2rem;
+      border-left: 4px solid var(--gold); margin-bottom: 1.5rem;
+    }
+    .lesson-card h4 { color: var(--navy); margin-bottom: 0.4rem; }
+    .lesson-card p { color: #666; font-size: 0.92rem; }
+    .phrase-box {
+      background: var(--navy); color: #fff; border-radius: 12px;
+      padding: 1.5rem 2rem; margin-top: 1.5rem;
+    }
+    .phrase-box h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+    .phrase-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .phrase-list li { font-size: 0.95rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .phrase-list li:last-child { border: none; }
+    .phrase-list em { color: var(--gold); font-style: normal; }
+
+    /* Hapkido Preview */
+    .video-wrapper {
+      position: relative; width: 100%; padding-top: 56.25%;
+      background: #000; border-radius: 12px; overflow: hidden;
+    }
+    .video-wrapper video,
+    .video-wrapper iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .techniques-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;
+    }
+    .technique {
+      background: #fff; border-radius: 10px; padding: 1.2rem;
+      text-align: center; border-top: 3px solid var(--gold);
+    }
+    .technique .icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    .technique h5 { color: var(--navy); font-size: 0.9rem; }
+    .technique p { color: #888; font-size: 0.78rem; }
+
+    /* Bible Preview */
+    .verse-card {
+      background: linear-gradient(135deg, #1a3d2b, #2d6b4a);
+      color: #fff; border-radius: 16px; padding: 2rem;
+      margin-bottom: 1.5rem; position: relative; overflow: hidden;
+    }
+    .verse-card::before {
+      content: '"'; position: absolute; top: -20px; left: 20px;
+      font-size: 8rem; color: rgba(255,255,255,0.08); font-family: Georgia;
+    }
+    .verse-card blockquote { font-size: 1.1rem; line-height: 1.8; margin-bottom: 0.8rem; position: relative; }
+    .verse-card cite { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .study-topics { display: flex; flex-direction: column; gap: 0.8rem; }
+    .topic-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: #fff; border-radius: 10px; padding: 1rem 1.4rem;
+    }
+    .topic-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .topic-item h5 { color: var(--navy); font-size: 0.95rem; margin-bottom: 0.1rem; }
+    .topic-item p { color: #777; font-size: 0.82rem; }
+
+    /* ─── GALLERY ─── */
+    #gallery { background: var(--navy); }
+    #gallery .section-label { color: var(--gold); }
+    #gallery .section-title { color: #fff; }
+    #gallery .section-desc { color: rgba(255,255,255,0.6); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 12px;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      border-radius: 10px; overflow: hidden; cursor: pointer;
+      position: relative; background: #2a3d6b;
+    }
+    .gallery-item:nth-child(3n+1) { grid-column: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s, filter 0.4s;
+    }
+    .gallery-item:hover img { transform: scale(1.06); filter: brightness(0.8); }
+    .gallery-overlay {
+      position: absolute; inset: 0; display: flex; align-items: flex-end;
+      padding: 1rem; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: #fff; font-size: 0.82rem; }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a2744, #2a3d6b);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.5rem;
+    }
+    .gallery-placeholder span { color: rgba(255,255,255,0.4); font-size: 0.75rem; }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 30px;
+      color: #fff; font-size: 2rem; cursor: pointer; background: none; border: none;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact { background: #fff; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5%; max-width: 1000px; margin: 3rem auto 0; align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; color: var(--navy); margin-bottom: 1rem;
+    }
+    .contact-info p { color: #666; margin-bottom: 2rem; }
+    .contact-detail { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .contact-detail .icon { font-size: 1.3rem; }
+    .contact-detail a { color: var(--navy); text-decoration: none; }
+    .paypal-box {
+      background: var(--navy); border-radius: 16px; padding: 2.5rem;
+      text-align: center; color: #fff;
+    }
+    .paypal-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .paypal-box p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+    .qr-placeholder {
+      width: 180px; height: 180px; margin: 0 auto 1.5rem;
+      background: #fff; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .qr-placeholder img { width: 100%; height: 100%; object-fit: contain; }
+    .paypal-label { font-size: 1.1rem; font-weight: 600; color: var(--gold); letter-spacing: 1px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0c1424; color: rgba(255,255,255,0.5);
+      text-align: center; padding: 2.5rem 5%;
+      font-size: 0.85rem;
+    }
+    footer strong { color: var(--gold); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .classes-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(3n+1) { grid-column: span 1; }
+      .techniques-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 4%; }
+      .nav-links { gap: 1rem; }
+      .nav-links li:nth-child(n+4) { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nav-logo">Woodug Lim</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-subtitle">Instructor &amp; Coach</p>
+    <h1 class="hero-name">Woodug Lim</h1>
+    <p class="hero-tagline">
+      Empowering lives through language, discipline, and faith.
+      Learn English, master Hapkido, and explore the Scriptures.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">ESL Instructor</span>
+      <span class="badge">Hapkido Coach</span>
+      <span class="badge">Bible Teacher</span>
+    </div>
+    <a href="#classes" class="btn-primary">Explore Classes</a>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo">
+      <!-- Replace src with your portrait photo -->
+      <img src="images/woodug-portrait.jpg" alt="Woodug Lim"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="about-photo-placeholder" style="display:none;">
+        <span>📷 Your portrait photo here</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Hello, I'm Woodug Lim</h2>
+      <p>
+        I am a dedicated instructor with a passion for teaching English as a second language,
+        sharing the art and discipline of Hapkido, and guiding meaningful Bible study
+        journeys. Based in the UK, I have had the privilege of working with students
+        from diverse backgrounds around the world.
+      </p>
+      <p>
+        My approach is personal, practical, and rooted in encouragement. Whether you are
+        learning your first English sentences, practicing your first Hapkido throw, or
+        opening the Bible for the first time — you are in the right place.
+      </p>
+      <div class="about-facts">
+        <div class="fact"><span class="fact-num">10+</span><span class="fact-label">Years Teaching</span></div>
+        <div class="fact"><span class="fact-num">3</span><span class="fact-label">Disciplines</span></div>
+        <div class="fact"><span class="fact-num">∞</span><span class="fact-label">Passion</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLASSES ─── -->
+<section id="classes">
+  <p class="section-label">What I Teach</p>
+  <h2 class="section-title">My Classes</h2>
+  <p class="section-desc">
+    Three disciplines, one mission — to help you grow in confidence, strength, and wisdom.
+  </p>
+
+  <div class="classes-grid" style="margin-top:3rem;">
+    <!-- ESL Card -->
+    <div class="class-card">
+      <div class="class-thumb class-thumb-esl">
+        <img src="images/class-esl.jpg" alt="ESL Class"
+             onerror="this.style.display='none';" />
+        <span class="class-icon">🗣️</span>
+      </div>
+      <div class="class-body">
+        <h3>English (ESL)</h3>
+        <p>Build real-world English skills for everyday life, work, and travel. Conversational, grammar, and pronunciation coaching for all levels.</p>
+        <div class="class-tags">
+          <span class="tag">Conversation</span>
+          <span class="tag">Grammar</span>
+          <span class="tag">Pronunciation</span>
+          <span class="tag">All Levels</span>
+        </div>
+        <a href="#esl-preview" class="btn-outline">See Preview →</a>
+      </div>
+    </div>
+
+    <!-- Hapkido Card -->
+    <div class="class-card">
+      <div class="class-thumb class-thumb-hapkido">
+        <img src="images/class-hapkido.jpg" alt="Hapkido Class"
+             onerror="this.style.display='none';" />
+        <span class="class-icon">🥋</span>
+      </div>
+      <div class="class-body">
+        <h3>Hapkido</h3>
+        <p>Traditional Korean martial art focusing on joint locks, throws, and kicks. Build discipline, fitness, and self-defense skills from beginner to advanced.</p>
+        <div class="class-tags">
+          <span class="tag">Self-Defense</span>
+          <span class="tag">Fitness</span>
+          <span class="tag">Discipline</span>
+          <span class="tag">All Ages</span>
+        </div>
+        <a href="#hapkido-preview" class="btn-outline">See Preview →</a>
+      </div>
+    </div>
+
+    <!-- Bible Card -->
+    <div class="class-card">
+      <div class="class-thumb class-thumb-bible">
+        <img src="images/class-bible.jpg" alt="Bible Study"
+             onerror="this.style.display='none';" />
+        <span class="class-icon">📖</span>
+      </div>
+      <div class="class-body">
+        <h3>Bible Study</h3>
+        <p>Explore the Scriptures with depth and joy. Weekly group and one-on-one sessions covering both Old and New Testaments with practical application.</p>
+        <div class="class-tags">
+          <span class="tag">New Testament</span>
+          <span class="tag">Devotional</span>
+          <span class="tag">Group &amp; 1-on-1</span>
+        </div>
+        <a href="#bible-preview" class="btn-outline">See Preview →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ESL PREVIEW ─── -->
+  <div class="preview-section" id="esl-preview" style="margin-top:5rem;">
+    <div class="preview-header">
+      <span>🗣️</span>
+      <div>
+        <span>Sample Lesson</span>
+        <h3>ESL Preview — Everyday English</h3>
+      </div>
+    </div>
+    <div class="preview-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+        <div>
+          <h4 style="color:var(--navy);margin-bottom:1.2rem;font-family:'Playfair Display',serif;">Lesson Structure</h4>
+          <div class="lesson-card">
+            <h4>🔤 Warm-Up (5 min)</h4>
+            <p>Review vocabulary from the previous class and quick pronunciation drills to get your mouth moving.</p>
+          </div>
+          <div class="lesson-card">
+            <h4>📚 New Topic (20 min)</h4>
+            <p>Focus on one practical grammar point or vocabulary theme — shopping, travel, workplace, daily life.</p>
+          </div>
+          <div class="lesson-card">
+            <h4>💬 Conversation Practice (20 min)</h4>
+            <p>Real dialogue practice with role-play scenarios. No judgment, only encouragement.</p>
+          </div>
+          <div class="lesson-card">
+            <h4>✏️ Wrap-Up &amp; Homework (5 min)</h4>
+            <p>Quick summary and a short, fun take-home exercise to reinforce what you learned.</p>
+          </div>
+        </div>
+        <div>
+          <div class="phrase-box">
+            <h4>🌟 Today's Phrases</h4>
+            <ul class="phrase-list">
+              <li><em>"Could you say that again, please?"</em><br/><span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">Politely ask for repetition</span></li>
+              <li><em>"I'm not sure I follow you."</em><br/><span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">Express that you don't understand</span></li>
+              <li><em>"What do you mean by that?"</em><br/><span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">Ask for clarification</span></li>
+              <li><em>"Let me put it another way."</em><br/><span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">Rephrase your idea clearly</span></li>
+              <li><em>"That makes sense now!"</em><br/><span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">Confirm understanding</span></li>
+            </ul>
+          </div>
+          <div style="background:var(--light-gray);border-radius:12px;padding:1.5rem;margin-top:1.5rem;">
+            <h5 style="color:var(--navy);margin-bottom:0.8rem;">📅 Class Options</h5>
+            <p style="font-size:0.9rem;color:#666;">Private 1-on-1 · Small Group (max 6) · Online via Zoom</p>
+            <p style="font-size:0.9rem;color:#666;margin-top:0.5rem;">Flexible scheduling · Beginner to Advanced</p>
+            <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:1.2rem;font-size:0.85rem;padding:0.7rem 1.8rem;">Book a Trial Class</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── HAPKIDO PREVIEW ─── -->
+  <div class="preview-section" id="hapkido-preview" style="margin-top:3rem;">
+    <div class="preview-header" style="background:#4a1010;">
+      <span>🥋</span>
+      <div>
+        <span>Training Preview</span>
+        <h3>Hapkido Preview — See It In Action</h3>
+      </div>
+    </div>
+    <div class="preview-body">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start;">
+        <div>
+          <!-- VIDEO ELEMENT — replace src with your actual video file or YouTube embed -->
+          <div class="video-wrapper">
+            <!-- Option A: Local video file -->
+            <video controls poster="images/hapkido-poster.jpg">
+              <source src="images/hapkido-demo.mp4" type="video/mp4" />
+              <!-- Option B: If no file, show YouTube iframe instead -->
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p style="font-size:0.8rem;color:var(--mid-gray);margin-top:0.8rem;text-align:center;">
+            📹 Hapkido demonstration — Woodug Lim
+          </p>
+        </div>
+        <div>
+          <h4 style="color:var(--navy);font-family:'Playfair Display',serif;margin-bottom:1.2rem;">Core Techniques We Cover</h4>
+          <div class="techniques-grid">
+            <div class="technique">
+              <span class="icon">🤜</span>
+              <h5>Joint Locks</h5>
+              <p>Wrist &amp; elbow control</p>
+            </div>
+            <div class="technique">
+              <span class="icon">🦵</span>
+              <h5>Kicks</h5>
+              <p>Circular &amp; linear</p>
+            </div>
+            <div class="technique">
+              <span class="icon">↩️</span>
+              <h5>Throws</h5>
+              <p>Hip &amp; leg sweeps</p>
+            </div>
+            <div class="technique">
+              <span class="icon">🧘</span>
+              <h5>Falls</h5>
+              <p>Safe breakfalls</p>
+            </div>
+            <div class="technique">
+              <span class="icon">🛡️</span>
+              <h5>Defense</h5>
+              <p>Grabs &amp; attacks</p>
+            </div>
+            <div class="technique">
+              <span class="icon">🏅</span>
+              <h5>Grading</h5>
+              <p>Belt progression</p>
+            </div>
+          </div>
+          <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:1.5rem;font-size:0.85rem;padding:0.7rem 1.8rem;">Join a Trial Session</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BIBLE PREVIEW ─── -->
+  <div class="preview-section" id="bible-preview" style="margin-top:3rem;">
+    <div class="preview-header" style="background:#1a3d2b;">
+      <span>📖</span>
+      <div>
+        <span>Sample Session</span>
+        <h3>Bible Study Preview — Jude &amp; Colossians</h3>
+      </div>
+    </div>
+    <div class="preview-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+        <div>
+          <div class="verse-card">
+            <blockquote>
+              "But you, dear friends, carefully build yourselves up in this most holy faith by praying in the Holy Spirit, staying right at the center of God's love."
+            </blockquote>
+            <cite>— Jude 1:20–21 (MSG)</cite>
+          </div>
+          <div class="verse-card" style="margin-top:0;">
+            <blockquote>
+              "You received Christ Jesus, the Master; now live him. You're deeply rooted in him. School's out; quit studying the subject and start living it!"
+            </blockquote>
+            <cite>— Colossians 2:6–7 (MSG)</cite>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:var(--navy);font-family:'Playfair Display',serif;margin-bottom:1.2rem;">What We Study Together</h4>
+          <div class="study-topics">
+            <div class="topic-item">
+              <span class="topic-icon">🔥</span>
+              <div>
+                <h5>Fight With All You Have</h5>
+                <p>Jude's call to contend for the faith entrusted to us</p>
+              </div>
+            </div>
+            <div class="topic-item">
+              <span class="topic-icon">🌿</span>
+              <div>
+                <h5>He Is Your Life</h5>
+                <p>Living the resurrection life — Colossians 3 (MSG)</p>
+              </div>
+            </div>
+            <div class="topic-item">
+              <span class="topic-icon">🛡️</span>
+              <div>
+                <h5>Build Each Other Up</h5>
+                <p>1 Thessalonians 5:11 — encouragement in community</p>
+              </div>
+            </div>
+            <div class="topic-item">
+              <span class="topic-icon">📝</span>
+              <div>
+                <h5>Journaling &amp; Reflection</h5>
+                <p>Handwriting Scripture to internalize the Word</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:1.5rem;font-size:0.85rem;padding:0.7rem 1.8rem;background:#2d6b4a;color:#fff;">Join a Study Session</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery">
+  <p class="section-label">Travel Journal</p>
+  <h2 class="section-title">Adventures Around the World</h2>
+  <p class="section-desc">
+    Life is the greatest classroom. Here are snapshots from my journeys through the UK and beyond.
+  </p>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Gallery items — add your photo files to images/gallery/ and update these src paths -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/clifton-bridge.jpg" alt="Clifton Suspension Bridge, Bristol"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🌉</span><span>Clifton Suspension Bridge</span></div>
+      <div class="gallery-overlay"><span>Clifton Suspension Bridge, Bristol</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/bristol-harbour.jpg" alt="Bristol Harbour"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>⛵</span><span>Bristol Harbour</span></div>
+      <div class="gallery-overlay"><span>Bristol Floating Harbour</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/ss-great-britain.jpg" alt="SS Great Britain"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🚢</span><span>SS Great Britain</span></div>
+      <div class="gallery-overlay"><span>Brunel's SS Great Britain</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/cabot-tower.jpg" alt="Cabot Tower Bristol"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🗼</span><span>Cabot Tower</span></div>
+      <div class="gallery-overlay"><span>Cabot Tower, Bristol</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/bristol-museum.jpg" alt="Bristol Museum"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🏛️</span><span>Bristol Museum</span></div>
+      <div class="gallery-overlay"><span>Bristol Museum &amp; Art Gallery</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/big-ben-night.jpg" alt="Big Ben at Night"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🕐</span><span>Big Ben at Night</span></div>
+      <div class="gallery-overlay"><span>Big Ben, Westminster — Night</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/parliament.jpg" alt="Houses of Parliament"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🏛️</span><span>Houses of Parliament</span></div>
+      <div class="gallery-overlay"><span>Houses of Parliament, London</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/avon-gorge.jpg" alt="Avon Gorge"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🏔️</span><span>Avon Gorge</span></div>
+      <div class="gallery-overlay"><span>Avon Gorge, Bristol</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/bristol-colorful.jpg" alt="Bristol Colourful Houses"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🌈</span><span>Bristol Houses</span></div>
+      <div class="gallery-overlay"><span>Colourful Houses, Clifton Wood</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/sunset-silhouette.jpg" alt="Sunset Silhouette"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🌅</span><span>Golden Sunset</span></div>
+      <div class="gallery-overlay"><span>Golden Hour at the Park</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/countryside.jpg" alt="English Countryside"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>🌾</span><span>English Countryside</span></div>
+      <div class="gallery-overlay"><span>English Countryside Walk</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="images/gallery/coffee.jpg" alt="Coffee Moment"
+           onerror="this.parentElement.querySelector('.gallery-overlay').style.opacity=1;this.style.display='none';" />
+      <div class="gallery-placeholder"><span>☕</span><span>Coffee Moment</span></div>
+      <div class="gallery-overlay"><span>A Perfect Flat White</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Start Your Journey Today</h2>
+  <p class="section-desc">
+    Ready to start learning? Reach out to schedule a free trial class in any of the three disciplines.
+  </p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Let's Connect</h3>
+      <p>
+        Whether you want to improve your English, start Hapkido training, or join a
+        Bible study group — I'd love to hear from you. All levels are welcome.
+      </p>
+      <div class="contact-detail">
+        <span class="icon">📧</span>
+        <a href="mailto:Wooduglim@gmail.com">Wooduglim@gmail.com</a>
+      </div>
+      <div class="contact-detail">
+        <span class="icon">📍</span>
+        <span>Based in the United Kingdom</span>
+      </div>
+      <div class="contact-detail">
+        <span class="icon">🌐</span>
+        <span>Online classes available worldwide</span>
+      </div>
+      <div style="margin-top:2rem;">
+        <h5 style="color:var(--navy);margin-bottom:1rem;">Available Classes</h5>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <div style="display:flex;justify-content:space-between;padding:0.8rem 1rem;background:var(--light-gray);border-radius:8px;">
+            <span>🗣️ ESL English</span><span style="color:var(--gold);font-weight:600;">Online / In-Person</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:0.8rem 1rem;background:var(--light-gray);border-radius:8px;">
+            <span>🥋 Hapkido</span><span style="color:var(--gold);font-weight:600;">In-Person</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:0.8rem 1rem;background:var(--light-gray);border-radius:8px;">
+            <span>📖 Bible Study</span><span style="color:var(--gold);font-weight:600;">Online / In-Person</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="paypal-box">
+        <h4>WOODUG LIM</h4>
+        <p>Scan to pay for classes via PayPal</p>
+        <div class="qr-placeholder">
+          <!-- Replace with your PayPal QR image -->
+          <img src="images/paypal-qr.jpg" alt="PayPal QR Code"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:#999;font-size:0.8rem;\'>Place your PayPal<br/>QR image here</span>';" />
+        </div>
+        <p class="paypal-label">Scan · Pay · Go</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:0.8rem;">
+          Secure payment via PayPal
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>&copy; 2025 <strong>Woodug Lim</strong> — ESL · Hapkido · Bible Study</p>
+  <p style="margin-top:0.4rem;">United Kingdom &nbsp;·&nbsp; Online Worldwide</p>
+</footer>
+
+<!-- ─── LIGHTBOX ─── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<script>
+  // Lightbox
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    if (!img || img.style.display === 'none') return;
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
