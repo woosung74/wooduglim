@@ -1,2 +1,0 @@
-# wooduglim
-Woodug Lim Homepage
